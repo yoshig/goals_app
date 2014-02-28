@@ -58,6 +58,12 @@ def add_goal(title)
   click_button "Add Goal"
 end
 
+def add_public_goal(title)
+  fill_in "Title", with: title
+  check "Public?"
+  click_button "Add Goal"
+end
+
 def switch_user(new_username)
   click_button("Sign Out")
   visit new_user_url
