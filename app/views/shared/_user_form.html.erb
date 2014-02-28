@@ -1,0 +1,16 @@
+<% action = (params[:controller] == "sessions" ? session_url : users_url )%>
+<% title = (params[:controller] == "sessions" ? "Sign In" : "Sign Up")%>
+
+<form action="<%= action %>" method="POST" accept-charset="utf-8">
+  <%= csrf_token %>
+
+  <label>Username
+    <input type="text" name="user[username]" value="<%= @user.username %>">
+  </label>
+
+  <label>Password
+    <input type="password" name="user[password]" value="<%= @user.password %>">
+  </label>
+
+  <p><input type="submit" value="<%= title %>"></p>
+</form>

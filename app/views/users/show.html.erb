@@ -1,0 +1,16 @@
+<% own_page = current_user == @user%>
+
+This is <%= @user.username %>'s homepage!
+
+<h1>Goals</h1>
+<% @user.goals.order(:created_at).each do |goal| %>
+  <% if own_page || !goal.privacy %>
+    <p><%= render "goals/display", :goal => goal %></p>
+  <% end %>
+  --------------------------------------------------
+<% end %>
+
+<% if own_page %>
+  <h2>Create a Goal</h2>
+  <%= render "goals/form" %>
+<% end %>

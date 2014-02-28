@@ -1,0 +1,15 @@
+<% comp_button_title = goal.completed ? "Uncomplete" : "Complete" %>
+<% priv_button_title = goal.privacy ?  "Make Public" : "Make Private"%>
+
+<%= goal.title %>
+  <br>
+  <%= goal.completed ? "Completed!" : "In Progress" %>
+  <% if goal.user == current_user %>
+    <%= button_to(comp_button_title, toggle_completion_goal_url(goal),
+                  method: :post)%>
+    <%= goal.privacy ? "Private" : "Public" %>
+    <%= button_to(priv_button_title, toggle_privacy_goal_url(goal),
+                  method: :post)%>
+  <% end %>
+<%= goal.description if goal.description %>
+

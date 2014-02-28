@@ -1,0 +1,16 @@
+<form action="<%= goals_url %>" method="post">
+  <%= csrf_token %>
+
+  <label for="title">Title</label>
+  <input type="text" name="goal[title]" value="<%= @goal.title %>" id="title">
+
+  <label for="description">Description</label>
+  <input type="textarea" name="goal[description]"
+         value="<%= @goal.description %>" id="description">
+
+  <label for="public">Public?</label>
+  <input type="checkbox" name="goal[privacy]" id="public" value="false"
+  <%= "checked".html_safe if @goal.privacy %> >
+
+  <p><input type="submit" value="Add Goal"></p>
+</form>
