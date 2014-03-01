@@ -1,0 +1,12 @@
+<% sorted_goals = Goal.where(privacy: false).sort! do |g1, g2|
+  karma_diff = (g2.karma <=> g1.karma)
+  karma_diff.zero? ? (g1.title.downcase <=> g2.title.downcase) : karma_diff
+end %>
+
+<h1>Leaderboard</h1>
+
+<ol>
+<% sorted_goals.each do |goal| %>
+  <li><%= link_to goal.title, goal_url(goal)%>, Karma: <%= goal.karma %></li>
+<% end %>
+</ol>

@@ -31,4 +31,26 @@ feature 'cheers' do
       expect(page).not_to have_button("cheer_goal#{test_goal.id}")
     end
   end
+
+  feature 'leader board' do
+    let(:test_goal) { Goal.find_by_title("foogoal1") }
+    let(:test_goal2) { Goal.find_by_title("foogoal2") }
+
+    it "only displays public goals" do
+      visit user_url(User.find_by_username("bar"))
+      add_goal("Private Goal")
+      visit cheers_url
+      expect(page).not_to have_content("Private Goal")
+    end
+
+    it "sorts goals by cheers and tied goals alphabetically" do
+      visit cheers_url
+      regex  = ""
+      expect(page.body).to match(/foogoal1.*foogoal2/)
+      visit user_url(User.find_by_username("foo"))
+      click_button "cheer_goal#{test_goal2.id}"
+      visit cheers_url
+      expect(page.body).to match(/foogoal2.*foogoal1/)
+    end
+  end
 end

@@ -2,6 +2,9 @@ class CheersController < ApplicationController
   before_action :verify_logged_in
   MAX_CHEERS = 1
 
+  def index
+  end
+
   def create
     if current_user.cheers.count < MAX_CHEERS
       cheer = current_user.cheers.new(:goal_id => params[:cheer][:goal_id])
