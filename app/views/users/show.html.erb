@@ -12,6 +12,11 @@ This is <%= @user.username %>'s homepage!
 <% @user.goals.order(:created_at).each do |goal| %>
   <% if own_page || !goal.privacy %>
     <p><%= render "goals/display", :goal => goal %>
+      Karma: <%= goal.karma %>
+      <% if !own_page &&
+           Cheer.where(user_id: current_user.id, goal_id: goal.id).empty? %>
+        <%= render "cheers/form", :goal => goal %>
+      <% end %>
 
     <% goal.comments.order(:created_at).each do |comment| %>
       <p><%= render "comments/display", comment: comment %></p>

@@ -1,0 +1,7 @@
+<form action="<%= cheers_url %>" method="post">
+  <%= csrf_token %>
+
+  <input type="hidden" name="cheer[goal_id]" value="<%= goal.id %>">
+
+  <p><input type="submit" value="Cheer!" id="cheer_goal<%= goal.id %>"></p>
+</form>

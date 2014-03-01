@@ -2,16 +2,7 @@ require 'spec_helper'
 
 feature "comments" do
   before(:each) do
-    visit new_user_url
-    sign_up("foo")
-    add_public_goal("foogoal1")
-    add_public_goal("foogoal2")
-    click_button("Sign Out")
-    visit new_user_url
-    sign_up("bar")
-    add_public_goal("bargoal1")
-    add_public_goal("bargoal2")
-    visit user_url(User.find_by_username("foo"))
+    prepare_two_users
   end
 
   feature "commenting on goals" do

@@ -3,6 +3,7 @@ GoalsApp::Application.routes.draw do
   resources :users
   resource :session, only: [:new, :create, :destroy]
   resources :comments, only: [:create]
+  resources :cheers, only: [:create]
   resources :goals do
     member do
       post "toggle_privacy"

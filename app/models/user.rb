@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   has_many :goals, :inverse_of => :user
   has_many :submitted_comments, class_name: "Comment"
+  has_many :cheers, :inverse_of => :user
 
   def self.find_by_credentials(auth_params)
     user = User.find_by_username(auth_params[:username])

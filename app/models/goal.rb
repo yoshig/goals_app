@@ -18,6 +18,11 @@ class Goal < ActiveRecord::Base
   before_validation :ensure_booleans_set
 
   belongs_to :user, :inverse_of => :goals
+  has_many :cheers, :inverse_of => :goal
+
+  def karma
+    self.cheers.count
+  end
 
   def ensure_booleans_set
     self.completed ||= false
