@@ -1,11 +1,23 @@
 <% own_page = current_user == @user%>
 
 This is <%= @user.username %>'s homepage!
+<% @user.comments.order(:created_at).each do |comment| %>
+  <p><%= render "comments/display", comment: comment %></p>
+<% end %>
+
+<%= render "comments/form", target: @user %>
+
 
 <h1>Goals</h1>
 <% @user.goals.order(:created_at).each do |goal| %>
   <% if own_page || !goal.privacy %>
-    <p><%= render "goals/display", :goal => goal %></p>
+    <p><%= render "goals/display", :goal => goal %>
+
+    <% goal.comments.order(:created_at).each do |comment| %>
+      <p><%= render "comments/display", comment: comment %></p>
+    <% end %>
+    <%= render "comments/form", :target => goal%></p>
+
   <% end %>
   --------------------------------------------------
 <% end %>

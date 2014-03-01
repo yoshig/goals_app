@@ -13,6 +13,7 @@
 #
 
 class Goal < ActiveRecord::Base
+  include Commentable
   validates :title, :user, :presence => true
   before_validation :ensure_booleans_set
 

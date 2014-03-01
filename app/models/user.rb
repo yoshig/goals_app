@@ -11,6 +11,7 @@
 #
 
 class User < ActiveRecord::Base
+  include Commentable
   validates :username, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :username, :session_token, uniqueness: true
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :goals, :inverse_of => :user
+  has_many :submitted_comments, class_name: "Comment"
 
   def self.find_by_credentials(auth_params)
     user = User.find_by_username(auth_params[:username])

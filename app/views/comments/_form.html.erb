@@ -1,0 +1,16 @@
+<form action="<%= comments_url %>" method="post">
+  <%= csrf_token %>
+
+  <label>Comment
+  <input type="text" name="comment[body]"
+         id="comment_text_<%= target.class %><%= target.id %>"></label>
+
+  <input type="hidden" name="comment[target_class]"
+  value="<%= target.class %>">
+
+  <input type="hidden" name="comment[target_id]"
+  value="<%= target.id %>">
+
+  <p><input type="submit" value="Submit Comment"
+    id="submit_comment_<%= target.class %><%= target.id %>"></p>
+</form>

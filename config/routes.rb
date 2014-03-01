@@ -1,7 +1,8 @@
 GoalsApp::Application.routes.draw do
   root to: "users#show"
   resources :users
-  resource :session
+  resource :session, only: [:new, :create, :destroy]
+  resources :comments, only: [:create]
   resources :goals do
     member do
       post "toggle_privacy"
